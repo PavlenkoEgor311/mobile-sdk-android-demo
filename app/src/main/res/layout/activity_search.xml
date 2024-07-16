@@ -10,10 +10,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ru.dgis.sdk.directory.SearchLayout
-        android:id="@+id/search_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:dgis_searchType="online"/>
-
 </FrameLayout>

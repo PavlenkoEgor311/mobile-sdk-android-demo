@@ -5,7 +5,6 @@ import com.huawei.hms.api.HuaweiApiAvailability
 import ru.dgis.sdk.Context
 import ru.dgis.sdk.demo.location.HMSLocationSource
 import ru.dgis.sdk.positioning.DefaultLocationSource
-import ru.dgis.sdk.positioning.LocationService
 import ru.dgis.sdk.positioning.LocationSource
 import ru.dgis.sdk.positioning.registerPlatformLocationSource
 import kotlin.properties.Delegates
@@ -37,6 +36,3 @@ class Application : Application() {
 
 val Application.sdkContext: Context
     get() = (this as ru.dgis.sdk.demo.Application).sdkContext
-
-val Application.locationService: LocationService
-    get() = (this as ru.dgis.sdk.demo.Application).locationSource as LocationService

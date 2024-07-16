@@ -13,7 +13,6 @@ import com.huawei.hms.location.LocationResult
 import com.huawei.hms.location.LocationServices
 import ru.dgis.sdk.positioning.DesiredAccuracy
 import ru.dgis.sdk.positioning.LocationChangeListener
-import ru.dgis.sdk.positioning.LocationService
 import ru.dgis.sdk.positioning.LocationSource
 
 /**
@@ -25,7 +24,7 @@ import ru.dgis.sdk.positioning.LocationSource
  *
  * Go to Application.kt to see example of detection HMS on device.
  */
-class HMSLocationSource(context: Context) : LocationSource, LocationService {
+class HMSLocationSource(context: Context) : LocationSource {
     // Use application context to avoid memory leaks associated with activity contexts.
     // In general, we suggest to always pass applicationContext to constructor.
     private val appContext = context.applicationContext
@@ -51,11 +50,6 @@ class HMSLocationSource(context: Context) : LocationSource, LocationService {
         }
     }
 
-    override val lastLocation: Location?
-        get() = _lastLocation
-
-    // Activate the location source with a specified listener, ensuring single activation.
-    // Using @Synchronized to ensure thread safety since method can be called from different threads
     @Synchronized
     override fun activate(listener: LocationChangeListener) {
         if (this.listener != null) {

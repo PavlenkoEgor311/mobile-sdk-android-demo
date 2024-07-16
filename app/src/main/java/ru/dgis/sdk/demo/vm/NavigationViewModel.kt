@@ -8,13 +8,10 @@ import ru.dgis.sdk.Context
 import ru.dgis.sdk.await
 import ru.dgis.sdk.demo.R
 import ru.dgis.sdk.geometry.GeoPointWithElevation
-import ru.dgis.sdk.map.BearingSource
 import ru.dgis.sdk.map.Map
 import ru.dgis.sdk.map.MapObjectManager
 import ru.dgis.sdk.map.Marker
 import ru.dgis.sdk.map.MarkerOptions
-import ru.dgis.sdk.map.MyLocationController
-import ru.dgis.sdk.map.MyLocationMapObjectSource
 import ru.dgis.sdk.map.RouteEditorSource
 import ru.dgis.sdk.map.RouteMapObject
 import ru.dgis.sdk.map.ScreenDistance
@@ -139,13 +136,6 @@ class NavigationViewModel(
     }
 
     private fun initLocationSource() {
-        MyLocationMapObjectSource(
-            sdkContext,
-            MyLocationController(BearingSource.SATELLITE)
-        ).also {
-            map.addSource(it)
-            closeables.add(it)
-        }
     }
 
     override fun close() {
@@ -195,15 +185,15 @@ class NavigationViewModel(
             if (routes.isEmpty()) return false
             val routeParams = routeEditor.routesInfo.routeParams
             return point == routeParams.finishPoint ||
-                point == routeParams.startPoint
+                    point == routeParams.startPoint
         }
 
         points.forEachIndexed { index, point ->
             val marker = markers[index]
             marker.isVisible =
                 state.value == State.ROUTE_EDITING && point != null && !hasRouteWithEndPoint(
-                point
-            )
+                    point
+                )
             marker.position = if (point != null) {
                 GeoPointWithElevation(
                     point.coordinates.latitude,
